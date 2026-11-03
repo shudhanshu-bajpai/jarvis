@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jarvis</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <p class="eyebrow">Personal assistant</p>
+        <h1>Jarvis</h1>
+        <p id="status" class="status">Checking Gmail connection…</p>
+        <p id="setup" class="status"></p>
+        <a class="connect" href="/auth/google">Connect Gmail</a>
+      </header>
+
+      <form id="command-form">
+        <input
+          id="command"
+          type="text"
+          placeholder='Ask Jarvis: "read my emails"'
+          autocomplete="off"
+        />
+        <button type="submit">Ask</button>
+      </form>
+
+      <p id="reply" class="reply"></p>
+
+      <section id="list-view">
+        <div class="toolbar">
+          <button type="button" id="load-inbox" class="secondary">Load inbox</button>
+        </div>
+        <section id="emails" class="emails"></section>
+      </section>
+
+      <section id="detail-view" class="detail-view" hidden>
+        <button type="button" id="back-to-list" class="secondary">Back to list</button>
+        <article id="email-detail"></article>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

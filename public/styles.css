@@ -1,0 +1,161 @@
+:root {
+  color-scheme: dark;
+  --bg: #070b12;
+  --panel: #101826;
+  --line: #243044;
+  --text: #e8eef7;
+  --muted: #8ea0b8;
+  --accent: #5eead4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top, #14324a 0%, transparent 45%),
+    var(--bg);
+  color: var(--text);
+}
+
+.shell {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 20px 80px;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow,
+.status,
+.reply {
+  color: var(--muted);
+}
+
+.connect {
+  display: inline-block;
+  margin-top: 12px;
+  color: #041016;
+  background: var(--accent);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  gap: 8px;
+  margin: 28px 0 16px;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+input {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 12px 14px;
+  border-radius: 10px;
+}
+
+button {
+  background: var(--accent);
+  color: #041016;
+  border: 0;
+  border-radius: 10px;
+  padding: 0 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 8px 14px;
+  margin: 8px 0 16px;
+}
+
+.emails {
+  display: grid;
+  gap: 12px;
+}
+
+.email-card,
+#email-detail {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.email-card {
+  cursor: pointer;
+}
+
+.email-card:hover {
+  border-color: var(--accent);
+}
+
+.field {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 8px;
+  margin: 6px 0;
+  align-items: start;
+}
+
+.label {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-top: 2px;
+}
+
+.value,
+.body {
+  color: var(--text);
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.view-full {
+  margin-top: 10px;
+  padding: 8px 12px;
+}
+
+.body {
+  margin-top: 8px;
+}
+
+.email-frame {
+  width: 100%;
+  min-height: 420px;
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.unread {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}

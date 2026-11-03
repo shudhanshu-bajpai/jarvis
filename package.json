@@ -1,0 +1,17 @@
+{
+  "name": "jarvis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jarvis assistant with Gmail API integration",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "googleapis": "^144.0.0",
+    "open": "^10.1.0"
+  }
+}
