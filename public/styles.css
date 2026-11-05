@@ -159,3 +159,10 @@ button {
   font-weight: 700;
   margin-bottom: 8px;
 }
+
+#drive-panel { margin: 24px 0; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.toolbar .secondary { margin: 4px 0; font-size: 0.85rem; text-decoration: none; }
+.upload-label { cursor: pointer; border-radius: 10px; }
+button:disabled { opacity: 0.5; cursor: wait; }
+input { min-width: 0; }

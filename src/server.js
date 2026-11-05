@@ -12,10 +12,20 @@ import {
   parseEmailIntent,
 } from "./gmail.js";
 
+import { drive, driveConnected } from "./drive.js";
+
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 
-app.use(express.json());
+// Browser mutations must originate from this local app.
+app.use((req, res, next) => {
+  if (!["GET", "HEAD", "OPTIONS"].includes(req.method) && req.headers.origin &&
+      req.headers.origin !== `${req.protocol}://${req.get("host")}`) {
+    return res.status(403).json({ error: "Cross-origin requests are not allowed." });
+  }
+  next();
+});
+app.use(express.json({ limit: "15mb" }));
 app.use(express.static(path.resolve("public")));
 
 app.get("/api/status", async (_req, res) => {
@@ -26,7 +36,7 @@ app.get("/api/status", async (_req, res) => {
       return res.json({ connected: false, redirectUri });
     }
     const profile = await getProfile();
-    res.json({ connected: true, profile, redirectUri });
+    res.json({ connected: true, driveConnected: await driveConnected(), profile, redirectUri });
   } catch (error) {
     res.status(500).json({ connected: false, error: error.message, redirectUri });
   }
@@ -77,15 +87,38 @@ app.get("/api/emails/:id", async (req, res) => {
   }
 });
 
+const driveRoute = (handler) => async (req, res) => {
+  try { await handler(req, res); }
+  catch (error) {
+    const status = Number(error.status || error.response?.status || error.code);
+    res.status(status >= 400 && status < 600 ? status : 500).json({ error: error.message });
+  }
+};
+app.get("/api/drive/files", driveRoute(async (req, res) => {
+  res.json(await drive.list({ search: String(req.query.search || ""), parent: req.query.parent ? String(req.query.parent) : undefined,
+    trash: req.query.trash === "true", pageToken: String(req.query.pageToken || "") }));
+}));
+app.post("/api/drive/files", driveRoute(async (req, res) => {
+  res.status(201).json({ file: await drive.create(req.body || {}) });
+}));
+app.patch("/api/drive/files/:id", driveRoute(async (req, res) => {
+  res.json({ file: await drive.update(req.params.id, req.body || {}) });
+}));
+
 app.post("/api/command", async (req, res) => {
   try {
     const text = String(req.body?.text || "").trim();
+    if (/^(?:list |show |search )?(?:my )?drive(?: files)?(?:\s|$)/i.test(text)) {
+      const search = text.replace(/^(?:list |show |search )?(?:my )?drive(?: files)?\s*/i, "");
+      const result = await drive.list({ search });
+      return res.json({ reply: "Drive files", drive: result });
+    }
     const intent = parseEmailIntent(text);
 
     if (!intent) {
       return res.json({
         reply:
-          'I can read Gmail. Try "read my emails", "unread mail", "latest email", or "emails from someone@gmail.com".',
+          'I can manage Drive in the Drive panel. Try "drive files" or "search drive budget". For Gmail, try "read my emails", "unread mail", "latest email", or "emails from someone@gmail.com".',
       });
     }
 

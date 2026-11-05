@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const TOKEN_PATH = path.resolve("token.json");
-const SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"];
+const SCOPES = ["https://www.googleapis.com/auth/gmail.readonly", "https://www.googleapis.com/auth/drive"];
 
 export function createOAuthClient() {
   const clientId = process.env.GOOGLE_CLIENT_ID;

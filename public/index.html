@@ -11,9 +11,9 @@
       <header>
         <p class="eyebrow">Personal assistant</p>
         <h1>Jarvis</h1>
-        <p id="status" class="status">Checking Gmail connection…</p>
+        <p id="status" class="status">Checking Google connection…</p>
         <p id="setup" class="status"></p>
-        <a class="connect" href="/auth/google">Connect Gmail</a>
+        <a class="connect" href="/auth/google">Connect / reconnect Google</a>
       </header>
 
       <form id="command-form">
@@ -28,6 +28,20 @@
 
       <p id="reply" class="reply"></p>
 
+      <section id="drive-panel">
+        <h2>Google Drive</h2>
+        <p id="drive-status" class="status"></p>
+        <form id="drive-search-form"><input id="drive-search" placeholder="Search file names across Drive" aria-label="Search Drive"><button>Search</button></form>
+        <div class="toolbar">
+          <button class="secondary" id="drive-home">My Drive</button>
+          <button class="secondary" id="drive-trash">Trash</button>
+          <button class="secondary" id="drive-folder">New folder</button>
+          <label class="secondary upload-label">Upload file<input id="drive-upload" type="file" hidden></label>
+        </div>
+        <p id="drive-location" class="status">My Drive</p>
+        <div id="drive-files" class="emails"></div>
+        <button id="drive-more" class="secondary" hidden>Load more</button>
+      </section>
       <section id="list-view">
         <div class="toolbar">
           <button type="button" id="load-inbox" class="secondary">Load inbox</button>

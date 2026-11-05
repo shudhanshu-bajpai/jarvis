@@ -2,11 +2,12 @@
   "name": "jarvis",
   "version": "1.0.0",
   "private": true,
-  "description": "Jarvis assistant with Gmail API integration",
+  "description": "Jarvis assistant with Gmail and Google Drive integration",
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node --watch src/server.js"
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
